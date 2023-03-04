@@ -30,23 +30,25 @@ const modal = ref(null);
       <Modal v-if="BackboneOpen">Backbone</Modal>
     </Teleport>
     <Teleport to="#modal">
-      <Modal ref="modal" class="modal" v-if="BarbermaskineOpen">
-        <template v-slot:image>
-          <img width="200" height="200" src="../public/barbermaskine.webp" alt="Xiaomi Barbermaskine">
-        </template>
-        <template v-slot:heading>
-          Xiaomi Barbermaskine
-        </template>
-        <template v-slot:facts>
-          <p><span class="bold">Mærke:</span> Xiaomi</p> <br> <p><span class="bold">Mærke:</span> Xiaomi</p>
-        </template>
-        <template v-slot:links>
-          <a href="#">Link</a>
-        </template>
-        <template v-slot:close-btn>
-          <button class="close-btn" @click="BarbermaskineOpen = false">Luk</button>
-        </template>
-      </Modal>
+      <transition name="modal">
+        <Modal ref="modal" class="modal" v-if="BarbermaskineOpen">
+          <template v-slot:image>
+            <img width="200" height="200" src="../public/barbermaskine.webp" alt="Xiaomi Barbermaskine">
+          </template>
+          <template v-slot:heading>
+            Xiaomi Barbermaskine
+          </template>
+          <template v-slot:facts>
+            <p><span class="bold">Mærke:</span> Xiaomi</p> <br> <p><span class="bold">Mærke:</span> Xiaomi</p>
+          </template>
+          <template v-slot:links>
+            <a href="#">Link</a>
+          </template>
+          <template v-slot:close-btn>
+            <button class="close-btn" @click="BarbermaskineOpen = false">Luk</button>
+          </template>
+        </Modal>
+      </transition>
     </Teleport>
     <Teleport to="#modal">
       <Modal v-if="TshirtOpen">Hvide Tshirts</Modal>
@@ -100,5 +102,13 @@ main
       border-radius: 5px
       width: 100%
       height: auto
+
+.modal-enter-active,
+.modal-leave-active
+  transition: all 0.25s ease
+
+.modal-leave-to
+  transform: scale(1.05)
+  opacity: 0
 
 </style>
